@@ -2,14 +2,16 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { IndustryClassification } from '../industry.enum';
 import { PCB_Category } from '../PCBcategory.enum';
 import { Manufacturer } from '../manufacturer.enum';
-import { Manufacturing_Location } from '../manufacturingLocation.enum';
+//import { Manufacturing_Location } from '../manufacturingLocation.enum';
 import { Document } from 'mongoose';
 
 export type SummaryDocument = Summary & Document;
 
 @Schema()
 export class Summary {
-     @Prop({ type: String, required: true }) Productid: string;
+    
+ @Prop({ type: String, required: true }) 
+ Productid: string;
 
  @Prop({ required: true})
   ProductName : string
@@ -23,8 +25,8 @@ export class Summary {
   @Prop({ enum: Manufacturer, required: true})
   Manufacturer: Manufacturer;
 
-  @Prop({ enum: Manufacturing_Location, required: true})
-  Manufacturing_Location: Manufacturing_Location;
+  @Prop({ required: true})
+  Manufacturing_Location: string;
   
   @Prop({ type: Date , required: true})
   Production_Date: Date;
@@ -37,6 +39,9 @@ export class Summary {
 
    @Prop([String])
    additionalImageUrl: string[]; 
+
+   @Prop()
+   IsDraft: boolean; 
 }
 
 export const SummarySchema = SchemaFactory.createForClass(Summary);

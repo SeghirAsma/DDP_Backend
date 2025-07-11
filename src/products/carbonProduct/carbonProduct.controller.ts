@@ -10,7 +10,9 @@ export class CarbonProductController {
      @Post()
      @HttpCode(HttpStatus.CREATED)
      async create(@Body() dto: CarbonDto): Promise<Carbon> {
-       return this.carbonService.create(dto);
+       return this.carbonService.create({ 
+                  ...dto,
+                  IsDraft: true,});
      }
    
      @Get()

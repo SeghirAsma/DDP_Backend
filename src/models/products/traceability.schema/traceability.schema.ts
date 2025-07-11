@@ -15,6 +15,9 @@ export class Traceability {
  @Prop({ required: true})
   fileTraceabilityUrl: string;
 
+  @Prop()
+   IsDraft: boolean; 
+
   @Prop({ type: Types.ObjectId, ref: 'Summary', required: true })
   summaryId: string;
 

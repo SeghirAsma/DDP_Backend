@@ -1,8 +1,8 @@
-import { IsString, IsEnum, IsDateString,} from 'class-validator';
+import { IsString, IsEnum, IsDateString, IsBoolean,} from 'class-validator';
 import { IndustryClassification } from 'src/models/products/industry.enum';
 import { PCB_Category } from 'src/models/products/PCBcategory.enum';
 import { Manufacturer } from 'src/models/products/manufacturer.enum';
-import { Manufacturing_Location } from 'src/models/products/manufacturingLocation.enum';
+//import { Manufacturing_Location } from 'src/models/products/manufacturingLocation.enum';
 
 export class SummaryDto {
   @IsString()
@@ -20,8 +20,8 @@ export class SummaryDto {
   @IsEnum(Manufacturer)
   Manufacturer: Manufacturer;
 
-  @IsEnum(Manufacturing_Location)
-  Manufacturing_Location: Manufacturing_Location;
+  @IsString()
+  Manufacturing_Location: string;
 
   @IsDateString()
   Production_Date: Date;
@@ -34,4 +34,7 @@ export class SummaryDto {
 
   @IsString()
   additionalImageUrl?: string[];
+
+  @IsBoolean()
+  IsDraft: boolean; 
 }

@@ -10,7 +10,9 @@ export class RecycleController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() dto: RecycleDto): Promise<Recycle> {
-    return this.recycleService.create(dto);
+    return this.recycleService.create({ 
+                  ...dto,
+                  IsDraft: true,});
   }
 
   @Get()

@@ -15,6 +15,9 @@ export class Recycle {
  @Prop({ type: Number, required: true})
   Rating: number;
 
+  @Prop()
+  IsDraft: boolean; 
+
   @Prop({ type: Types.ObjectId, ref: 'Summary', required: true })
   summaryId: string;
 

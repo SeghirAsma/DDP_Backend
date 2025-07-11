@@ -1,4 +1,4 @@
-import { IsMongoId, IsNumber, IsString} from 'class-validator';
+import { IsBoolean, IsMongoId, IsNumber, IsString} from 'class-validator';
 
 export class RecycleDto {
 
@@ -10,6 +10,9 @@ export class RecycleDto {
      
      @IsNumber({})
      Rating?: number;
+
+     @IsBoolean()
+     IsDraft: boolean; 
 
      @IsMongoId({ message: 'summaryId must be a valid MongoDB ObjectId' })
      summaryId: string;

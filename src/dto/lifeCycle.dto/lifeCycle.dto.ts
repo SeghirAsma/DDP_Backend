@@ -1,4 +1,4 @@
-import { IsEnum, IsMongoId, IsNumber, IsString} from 'class-validator';
+import { IsBoolean, IsEnum, IsMongoId, IsNumber, IsString} from 'class-validator';
 import { Status } from 'src/models/products/status.enum';
 
 export class LifeCycleDto {
@@ -14,6 +14,9 @@ export class LifeCycleDto {
 
      @IsString()
      SecondLifeInfo?: string
+
+     @IsBoolean()
+     IsDraft: boolean; 
 
      @IsMongoId({ message: 'summaryId must be a valid MongoDB ObjectId' })
      summaryId: string;

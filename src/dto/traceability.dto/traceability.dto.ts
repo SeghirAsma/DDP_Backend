@@ -1,4 +1,4 @@
-import { IsString, IsMongoId,} from 'class-validator';
+import { IsString, IsMongoId, IsBoolean,} from 'class-validator';
 
 export class TraceabilityDto {
   @IsString()
@@ -9,6 +9,9 @@ export class TraceabilityDto {
 
   @IsString()
   fileTraceabilityUrl?: string;
+
+  @IsBoolean()
+  IsDraft: boolean; 
 
   @IsMongoId({ message: 'summaryId must be a valid MongoDB ObjectId' })
   summaryId: string;

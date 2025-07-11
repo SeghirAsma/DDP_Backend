@@ -5,9 +5,12 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 export function CustomFileFieldsInterceptor() {
   return FileFieldsInterceptor(
     [
-      { name: 'file', maxCount: 1 },
+      { name: 'imageUrl', maxCount: 1 },
       { name: 'additionalImages', maxCount: 5 },
-      {name: 'fileTraceability', maxCount: 1}
+      {name: 'fileTraceability', maxCount: 1},
+      {name: 'certifUrl', maxCount: 1},
+      { name: 'bomFile', maxCount: 1 },
+      { name: 'bomCerts', maxCount: 20 },
     ],
     {
       storage: diskStorage({

@@ -8,6 +8,9 @@ export class Carbon {
     @Prop({ type: Number, required: true})
     Raw_Material_Extraction : number
 
+    @Prop()
+    IsDraft: boolean; 
+
     @Prop({ type: Types.ObjectId, ref: 'Summary', required: true })
     summaryId: string;
 }

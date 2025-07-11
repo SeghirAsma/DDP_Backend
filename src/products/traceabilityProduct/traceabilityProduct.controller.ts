@@ -24,6 +24,7 @@ export class TraceabilityProductController {
           return this.traceabilityService.create({
             ...dto,
             fileTraceabilityUrl,
+            IsDraft : true,
           });
         }
     

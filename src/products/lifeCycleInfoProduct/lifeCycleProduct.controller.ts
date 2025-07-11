@@ -10,7 +10,9 @@ export class LifeCycleProductController {
          @Post()
          @HttpCode(HttpStatus.CREATED)
          async create(@Body() dto: LifeCycleDto): Promise<LifeCycle> {
-           return this.lifeCycleService.create(dto);
+           return this.lifeCycleService.create({ 
+                  ...dto,
+                  IsDraft: true,});
          }
        
          @Get()

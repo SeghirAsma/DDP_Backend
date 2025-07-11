@@ -19,6 +19,9 @@ export class LifeCycle {
   @Prop({ required: true})
   SecondLifeInfo : string
 
+  @Prop()
+  IsDraft: boolean; 
+
   @Prop({ type: Types.ObjectId, ref: 'Summary', required: true })
   summaryId: string;
 

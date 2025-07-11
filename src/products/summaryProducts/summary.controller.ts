@@ -1,11 +1,20 @@
-import { Controller, Post, Get, Param, Body, Delete, HttpCode, HttpStatus, Patch,UploadedFile,
-  UseInterceptors, UploadedFiles,} from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Delete, HttpCode, HttpStatus, Patch,
+  UseInterceptors, UploadedFiles,
+  UseGuards,} from '@nestjs/common';
 import { SummaryDto } from 'src/dto/summary.dto/summary.dto';
 import { Summary } from 'src/models/products/summary.schema/summary.schema';
 import { SummaryService } from './summary.service';
 import { CustomFileFieldsInterceptor,  } from 'src/utils/file-upload.utils';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { Role } from 'src/models/users/role.enum';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@Controller('products')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Controller('products')
+
+
    export class SummaryController { constructor(private readonly summaryService : SummaryService){};
 
     @Post()
@@ -13,13 +22,13 @@ import { CustomFileFieldsInterceptor,  } from 'src/utils/file-upload.utils';
     async create(
       @UploadedFiles()
       files: {
-        file?: Express.Multer.File[];
+        imageUrl?: Express.Multer.File[];
         additionalImages?: Express.Multer.File[];
       },
       @Body() dto: SummaryDto,
     ): Promise<Summary> {
-      const imageUrl = files.file?.[0]
-        ? `http://localhost:5000/uploads/${files.file[0].filename}`
+      const imageUrl = files.imageUrl?.[0]
+        ? `http://localhost:5000/uploads/${files.imageUrl[0].filename}`
         : '';
 
       const additionalImageUrl = files.additionalImages?.map(
@@ -30,10 +39,11 @@ import { CustomFileFieldsInterceptor,  } from 'src/utils/file-upload.utils';
         ...dto,
         imageUrl,
         additionalImageUrl,
+        IsDraft: true,
       });
     }
 
-
+  
   @Get()
   async findAll(): Promise<Summary[]> {
     return this.summaryService.findAll();
@@ -51,13 +61,13 @@ import { CustomFileFieldsInterceptor,  } from 'src/utils/file-upload.utils';
     @Param('id') id: string,
     @UploadedFiles()
     files: {
-      file?: Express.Multer.File[];
+      imageUrl?: Express.Multer.File[];
       additionalImages?: Express.Multer.File[];
     },
     @Body() dto: Partial<SummaryDto>,
   ): Promise<Summary> {
-    const imageUrl = files.file?.[0]
-      ? `http://localhost:5000/uploads/${files.file[0].filename}`
+    const imageUrl = files.imageUrl?.[0]
+      ? `http://localhost:5000/uploads/${files.imageUrl[0].filename}`
       : undefined;
 
     const additionalImageUrl = files.additionalImages?.map(
